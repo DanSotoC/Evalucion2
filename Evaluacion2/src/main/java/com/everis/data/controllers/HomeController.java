@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	@RequestMapping("/")
 	public String Login() {
-		return "userForm.jsp";
+		return "/user/userForm.jsp";
 	}
 }

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +19,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<title>Login</title>
+<title>Edicion</title>
 </head>
 <body>
 		<style type="text/css">
@@ -45,80 +47,80 @@
 		  	 <div class="container-fluid">
 				    <a class="navbar-brand" href="/">Registrar Usuario</a>
 				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
-				    <a class="navbar-brand" href="/productos">Registrar Producto</a>
-				    <a class="navbar-brand" href="/tabla_productos">Tabla Productos</a>
-				    <a class="navbar-brand" href="/tabla_productos">Carro</a>
+				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
+				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
+				    <a class="navbar-brand" href="/carro">Carro</a>
 			</div>
 	</nav>
 	<br>
 	
 	<div class="container" style="background-color=blue;">
-				<form class="well form-horizontal" action="/usuario/registrar" method="POST">
+				<form:form class="well form-horizontal" action="/usuario/update" modelAttribute="usuario" method="POST">
 				<fieldset>
 		
 				<!-- Form Name -->
-				<legend><center><h2><b>REGISTRO DE USUARIOS</b></h2></center></legend><br>
+				<legend><center><h2><b>EDICION DE USUARIOS</b></h2></center></legend><br>
 				
 				<!-- Text input-->
-		
+				<form:hidden path="id"/>
 				<div class="form-group">
-				  <label class="col-md-4 control-label">Nombre</label>  
+				  <form:label class="col-md-4 control-label" path="name">Nombre </form:label>
 				  <div class="col-md-4 inputGroupContainer">
 				  	<div class="input-group">
 				  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				 		 <input  type="text" id="name" name="name" placeholder="First Name" class="form-control">
+				 		 <form:input path="name" class="form-control"/>
 				    </div>
 				  </div>
 				</div>
-		
+				
+			   <!-- Text input-->
+				  <div class="form-group">
+				  <form:label class="col-md-4 control-label" path="lastname">Apellido </form:label>
+				  <div class="col-md-4 inputGroupContainer">
+				  	<div class="input-group">
+				  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				 		 <form:input path="lastname" class="form-control"/>
+				    </div>
+				  </div>
+				</div>
 				<!-- Text input-->
-		
-			   <div class="form-group">
-				  <label class="col-md-4 control-label" >Apellido</label> 
-				    <div class="col-md-4 inputGroupContainer">
-				    <div class="input-group">
-				  			<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  			<input type="text" id="lastname" name="lastname" placeholder="Last Name" class="form-control">
+				  <div class="form-group">
+				  <form:label class="col-md-4 control-label" path="rut">Rut </form:label>
+				  <div class="col-md-4 inputGroupContainer">
+				  	<div class="input-group">
+				  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				 		 <form:input path="rut" class="form-control"/>
 				    </div>
 				  </div>
 				</div>
-		
+				
 				<!-- Text input-->
-				
-				<div class="form-group">
-				  <label class="col-md-4 control-label" >Rut</label> 
-				    <div class="col-md-4 inputGroupContainer">
-				    <div class="input-group">
-				  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  <input type="text" id="rut" name="rut" placeholder="DNI" class="form-control">
+				  <div class="form-group">
+				  <form:label class="col-md-4 control-label" path="mail">Email </form:label>
+				  <div class="col-md-4 inputGroupContainer">
+				  	<div class="input-group">
+				  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				 		 <form:input path="mail" class="form-control"/>
 				    </div>
 				  </div>
 				</div>
 				
-				<div class="form-group">
-				  <label class="col-md-4 control-label" >Email</label> 
-				    <div class="col-md-4 inputGroupContainer">
-				    <div class="input-group">
-				  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  <input type="email" id="mail" name="mail" placeholder="Mail@Mail.com" class="form-control">
+				<!-- Text input-->
+				  <div class="form-group">
+				  <form:label class="col-md-4 control-label" path="password">Contraseña </form:label>
+				  <div class="col-md-4 inputGroupContainer">
+				  	<div class="input-group">
+				  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				 		 <form:input path="password" class="form-control"/>
 				    </div>
 				  </div>
 				</div>
 				
-				<div class="form-group">
-				  <label class="col-md-4 control-label" >Contraseña</label> 
-				    <div class="col-md-4 inputGroupContainer">
-				    <div class="input-group">
-				  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				  <input type="password" id="password" name="password" placeholder="Password" class="form-control">
-				    </div>
-				  </div>
-				</div>
 		
 			  
 			  <br>
-			  <input class="btn btn-success" type="submit" value="Guardar">
-			  </form> <br><br>  
+			  <input class="btn btn-success" type="submit" value="Update">
+			  </form:form> <br><br>  
 			</div>
 		</div>
 	

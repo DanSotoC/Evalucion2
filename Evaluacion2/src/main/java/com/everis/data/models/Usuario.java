@@ -25,10 +25,10 @@ public class Usuario {
 	@Size(min=4)
 	private String password;
 	
-	
+	//Inicio Relacion
 	@OneToOne(mappedBy="usuario", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	private Carro carro;
-
+	//Fin Relacion
 
 	public Long getId() {
 		return id;

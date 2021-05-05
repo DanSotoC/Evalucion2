@@ -1,12 +1,19 @@
 package com.everis.data.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="productos")
@@ -18,9 +25,16 @@ public class Producto {
 	private String name;
 	@Size(min=3, max=90)
 	private String description;
-	@Min(100)
+	@Min(0)
+	@Max(1000000)
 	private Integer price;
 	
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JoinTable(name="carros_productos",
+			   joinColumns = @JoinColumn(name="carro_id"),
+			   inverseJoinColumns = @JoinColumn(name="producto_id"))
+	private List<Carro> carros;
+
 	
 	public Producto() {	}
 

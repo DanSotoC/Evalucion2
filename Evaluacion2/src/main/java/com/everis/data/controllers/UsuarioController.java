@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.everis.data.models.Usuario;
+import com.everis.data.services.CarroService;
 import com.everis.data.services.UsuarioService;
 import com.everis.data.utils.Validacion;
 
@@ -20,6 +21,8 @@ public class UsuarioController {
 		
 		@Autowired
 		UsuarioService uService;
+		@Autowired
+		CarroService cService;
 		
 	
 		@RequestMapping("/registrar")
@@ -37,15 +40,15 @@ public class UsuarioController {
 				user.setRut(rut);
 			}
 			else {
-				return "error.jsp"; 
+				return "/user/error.jsp"; 
 			}
 			uService.save(user);
-			return "userForm.jsp";
+			return "/user/userForm.jsp";
 		}
 		@RequestMapping("/editar/{id}")
 		public String editar(@PathVariable("id") Long id, Model model){
 			model.addAttribute("usuario", uService.findById(id));
-			return "editUserForm.jsp";
+			return "/user/editUserForm.jsp";
 			
 		}
 		@RequestMapping("/update")
@@ -64,6 +67,7 @@ public class UsuarioController {
 			ArrayList<Usuario> userTable = new ArrayList<Usuario>();
 			userTable = (ArrayList<Usuario>)uService.findAll();
 			modelo.addAttribute("userTable",userTable);
-			return "userTable.jsp";
+			//modelo.addAttribute("listCarro",cService.findAll());
+			return "/user/userTable.jsp";
 		}
 }

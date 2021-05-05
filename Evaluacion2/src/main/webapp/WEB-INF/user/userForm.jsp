@@ -17,7 +17,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<title>Login</title>
+<title>Registrar Usuario</title>
 </head>
 <body>
 		<style type="text/css">
@@ -42,18 +42,18 @@
 	</style>
 	<nav class="navbar navbar-dark bg-dark">
   	<!-- Navbar content -->
-		  	 <div class="container-fluid">
+		   <div class="container-fluid">
 				    <a class="navbar-brand" href="/">Registrar Usuario</a>
 				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
-				    <a class="navbar-brand" href="/productos">Registrar Producto</a>
-				    <a class="navbar-brand" href="/tabla_productos">Tabla Productos</a>
-				    <a class="navbar-brand" href="/tabla_productos">Carro</a>
+				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
+				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
+				    <a class="navbar-brand" href="/carro">Carro</a>
 			</div>
 	</nav>
 	<br>
 	
 	<div class="container" style="background-color=blue;">
-				<form class="well form-horizontal" action="/producto/registrar" method="POST">
+				<form class="well form-horizontal" action="/usuario/registrar" method="POST">
 				<fieldset>
 		
 				<!-- Form Name -->
