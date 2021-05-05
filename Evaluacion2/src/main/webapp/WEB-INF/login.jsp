@@ -17,7 +17,7 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-<title>Registrar Usuario</title>
+<title>Login</title>
 </head>
 <body>
 		<style type="text/css">
@@ -40,52 +40,42 @@
 		}
 
 	</style>
-	<nav class="navbar navbar-dark bg-dark">
-  	<!-- Navbar content -->
-		   <div class="container-fluid">
-				    <a class="navbar-brand" href="/">Registrar Usuario</a>
-				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
-				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
-				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
-				    <a class="navbar-brand" href="/carro">Carro</a>
-			</div>
-	</nav>
-	<br>
 	
-	<div class="container container-xs">
-				<form class="well form-horizontal" action="/carro/agregar" method="POST">
+	<div class="container" style="background-color=blue;">
+				<form class="well form-horizontal" action="/login/acceso" method="POST">
 				<fieldset>
+		
+				<!-- Form Name -->
+				<legend><center><h2><b>Login</b></h2></center></legend><br>
+				
+				<!-- Text input-->
+		
 				<div class="form-group">
-				  <label class="col-md-4 control-label">Nombre del Carro</label>  
-				  <div class="col-md-4 inputGroupContainer">
-				  	<div class="input-group">
-				  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				 		 <input  type="text" id="name" name="name" placeholder="Shopping cart Name" class="form-control">
-				  </div> 
+				  <label class="col-md-4 control-label" >Email</label> 
+				    <div class="col-md-4 inputGroupContainer">
+				    <div class="input-group">
+				  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				  <input type="email" id="mail" name="mail" placeholder="Mail@Mail.com" class="form-control">
+				    </div>
 				  </div>
-				  <input class="btn btn-success" type="submit" value="Guardar">
 				</div>
-			    </form> 
-	</div>
-	
-	<center><h2><b>LISTADO DE COMPRAS</b></h2></center>
-		<table class="table table-striped table-hover">
-	             <thead class="table-dark">
-    				<tr>
-		              	  <th scope="col">Id</th>
-		                  <th scope="col">Nombre</th>
-		                  <th scope="col">Usuario Name</th>
-		                  <th scope="col">Productos</th>
-		                  <th scope="col">Opciones</th>
-		             </tr>
-		         </thead>
-	             <tbody> 
-	              <tr>
-
-				 </tr>
-				</tbody>
-			</table>
-	
+				
+				<div class="form-group">
+				  <label class="col-md-4 control-label" >Contraseña</label> 
+				    <div class="col-md-4 inputGroupContainer">
+				    <div class="input-group">
+				  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				  <input type="password" id="password" name="password" placeholder="Password" class="form-control">
+				    </div>
+				  </div>
+				</div>
+		
+			  
+			  <br>
+			  <input class="btn btn-success" type="submit" value="Entrar">
+			  </form> <br><br>  
+			</div>
+		</div>
 	
 	
 	

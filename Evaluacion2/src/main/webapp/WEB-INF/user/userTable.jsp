@@ -64,18 +64,22 @@
 	   						<th> <c:out value = "${user.getMail()}"> </c:out></th>
 	   						<td> <button type="button" class="btn btn-warning"><a href="/usuario/editar/${user.getId()}" style="text-decoration:none";>Edit</a></button>
 							<button type="button" class="btn btn-danger"><a href="/usuario/eliminar/${user.getId()}" style="text-decoration:none";>Delete</a></button></td>
-							<td><form action="/carro/agregarUser" method="POST" modelAttribute="carro"> 
-							<select>
-								<option value="0">-Eliga Carro-</option>
-								<c:forEach var="carro" items="${listCarro}">
-									<option value="<c:out value="${carro.id}"></c:out>"><c:out value="${carro.name}"></c:out> </option><br>
-									
-								</select>	
-								<button type="button" class="btn btn-success"><a href="/carro/agregarUser/${user.getId()}/${carro.id}/" style="text-decoration:none";>Añadir</a></button>	
-								</c:forEach>
+							<td><c:if test="${user.carro.getId()==null}"> 
 							
+								<form action="/carro/agregarUser" method="POST"> 
+								<input type="text" value="${user.getId()}" name="usuario_id"> 
+								<select name="carro_id">
+									<option value="0">-Eliga Carro-</option>
+									<c:forEach var="carro" items="${listCarro}">
+										<c:if test="${carro.usuario.getId()==null}">
+											<option value="<c:out value="${carro.id}"></c:out>"><c:out value="${carro.name}"></c:out> </option><br>
+								    	</c:if>
+								    </c:forEach>
+								</select>
+								<button type="submit" class="btn btn-success">Añadir</button>
+								</form>
 							
-							</form></td>
+							</c:if></td>
 	   					</tr>
 	   			   	</c:forEach>
 				 </tr>

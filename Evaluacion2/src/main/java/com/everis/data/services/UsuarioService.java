@@ -2,6 +2,7 @@ package com.everis.data.services;
 
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ public class UsuarioService {
 	UsuarioRepository uRepository;
 	
 	public void save(Usuario user) {
+		user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
 		uRepository.save(user);
 	}
 	public List<Usuario> findAll(){

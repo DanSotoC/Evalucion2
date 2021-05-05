@@ -8,4 +8,6 @@ import com.everis.data.models.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario,Long>{
 
+	Usuario findByMail(String mail);
+
 }

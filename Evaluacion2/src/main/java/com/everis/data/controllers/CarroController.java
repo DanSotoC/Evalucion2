@@ -1,7 +1,5 @@
 package com.everis.data.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.everis.data.models.Carro;
-import com.everis.data.models.Producto;
 import com.everis.data.models.Usuario;
 import com.everis.data.services.CarroService;
 import com.everis.data.services.ProductoService;
@@ -37,13 +34,15 @@ public class CarroController {
 		return "redirect:/carro";
 	}
 	
-	@RequestMapping("/agregarUser/{id}/{id2}")
-	public String AgregarCarroUser(@PathVariable("id") Long id, @PathVariable("id2") Long id2 ){
-		Carro carrito = cService.findById(id2);
+	@RequestMapping("/agregarUser")
+	public String AgregarCarroUser(@RequestParam("carro_id") String carro_id, @RequestParam("usuario_id") String usuario_id ){
+		System.out.println(carro_id + " " + usuario_id);
+		Carro carrito = cService.findById(Long.parseLong(carro_id) );
 		Usuario user = new Usuario();
-		user = uService.findById(id);
+		user = uService.findById(Long.parseLong(usuario_id));
 		
 		carrito.setUsuario(user);
+		cService.save(carrito);
 		return "redirect:/usuario/tabla_usuarios";
 	}
 	

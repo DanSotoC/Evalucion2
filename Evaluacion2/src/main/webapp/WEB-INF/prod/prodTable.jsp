@@ -70,7 +70,7 @@
 								<c:forEach var="carro" items="${listCarro}">
 									<option value="<c:out value="${carro.id}"></c:out>"><c:out value="${carro.name}"></c:out> </option><br>
 								</select>	
-								<button type="button" class="btn btn-success"><a href="/carro/agregarProd/${prod.getId()}/${carro.id}/" style="text-decoration:none";>Añadir</a></button>	
+								<button type="submit" class="btn btn-success">Añadir</button>	
 								</c:forEach>
 							</form></td>
 	   					</tr>

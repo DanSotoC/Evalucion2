@@ -67,7 +67,8 @@ public class UsuarioController {
 			ArrayList<Usuario> userTable = new ArrayList<Usuario>();
 			userTable = (ArrayList<Usuario>)uService.findAll();
 			modelo.addAttribute("userTable",userTable);
-			//modelo.addAttribute("listCarro",cService.findAll());
+			modelo.addAttribute("listCarro",cService.findAll());
+			//Query en el repository - Filtrar sin carro_id
 			return "/user/userTable.jsp";
 		}
 }

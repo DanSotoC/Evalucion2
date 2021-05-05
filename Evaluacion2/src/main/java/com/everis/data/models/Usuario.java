@@ -30,8 +30,21 @@ public class Usuario {
 	private Carro carro;
 	//Fin Relacion
 
+	
+	
+	
 	public Long getId() {
 		return id;
+	}
+
+
+	public Carro getCarro() {
+		return carro;
+	}
+
+
+	public void setCarro(Carro carro) {
+		this.carro = carro;
 	}
 
 
