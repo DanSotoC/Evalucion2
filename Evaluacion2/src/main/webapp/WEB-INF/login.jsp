@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,9 +42,9 @@
 		}
 
 	</style>
-	
+	<c:if test="${registrado == 0}">
 	<div class="container" style="background-color=blue;">
-				<form class="well form-horizontal" action="/login/acceso" method="POST">
+				<form class="well form-horizontal" action="/usuario/acceso" method="POST">
 				<fieldset>
 		
 				<!-- Form Name -->
@@ -76,8 +78,24 @@
 			  </form> <br><br>  
 			</div>
 		</div>
-	
-	
+	</c:if>
+	<c:if test="${registrado == 1}">
+	  
+	<nav class="navbar navbar-dark bg-dark">
+  	<!-- La idea de esta seccion es: Una vez ya registrado y luego de borrar la url (sin hacer logout) le muestre el nav bar y un mensaje diciendo "Ya esta registrado" -->
+		   <div class="container-fluid">
+				    <a class="navbar-brand" href="/">Registrar Usuario</a>
+				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
+				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
+				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
+				    <a class="navbar-brand" href="/carro">Carro</a>
+			</div>
+	</nav>
+	<br>
+		<div class="container" style="background-color=blue;">
+				<fieldset>
+				<legend><center><h2><b>¡¡ Ya estas Logeado !!</b></h2></center></legend><br>
+	</c:if >
 	
 </body>
 </html>

@@ -1,8 +1,9 @@
 package com.everis.data.controllers;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,9 +24,14 @@ public class CarroController {
 	ProductoService pService;
 	
 	@RequestMapping("")
-	public String inicioCarro(){
-		return "carro.jsp";
+	public String inicioCarro(HttpSession session){
+		Integer registrado = (Integer) session.getAttribute("registrado");
+		if (registrado == 1 ) {
+			return "carro.jsp";
+		}
+		return "login.jsp";
 	}
+
 	@RequestMapping("/agregar")
 	public String agregar(@RequestParam("name") String name){
 		Carro carro = new Carro();

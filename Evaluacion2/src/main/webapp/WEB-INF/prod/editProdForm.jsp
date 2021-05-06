@@ -2,6 +2,7 @@
     pageEncoding="ISO-8859-1"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,9 +44,9 @@
 
 	</style>
 	<nav class="navbar navbar-dark bg-dark">
-  	<!-- Navbar content -->
+	 	<!-- Navbar content -->
 		  	 <div class="container-fluid">
-				    <a class="navbar-brand" href="/">Registrar Usuario</a>
+				    <a class="navbar-brand" href="/usuario">Registrar Usuario</a>
 				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
 				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
 				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>

@@ -27,4 +27,20 @@ public class UsuarioService {
 	public void deleteById(Long id) {
 		uRepository.deleteById(id);
 	}
+	public boolean Autentication(String mail, String password) {
+		
+			Usuario person = uRepository.findByMail(mail);
+			if (person == null)
+			{
+				return false;
+			}
+			else {
+				if(BCrypt.checkpw(password, person.getPassword())) {
+					return true;
+				}else {
+					return false;
+				}
+			}
+	}
+	
 }

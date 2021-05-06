@@ -2,6 +2,8 @@ package com.everis.data.controllers;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,47 +29,72 @@ public class ProductoController {
 		CarroService cService;
 		
 		@RequestMapping("")
-		public String home() {
-			return "/prod/prodForm.jsp";
+		public String home(HttpSession session){
+			Integer registrado = (Integer) session.getAttribute("registrado");
+			if (registrado == 1 ) {
+				return "/prod/prodForm.jsp";
+			}
+			return "login.jsp";
 		}
 	
 		@RequestMapping("/registrar")
-		private String registrar(@RequestParam("name") String name,
+		private String registrar(HttpSession session,@RequestParam("name") String name,
 				@RequestParam("description") String description,
 				@RequestParam("price") Integer price) {
-			Producto prod = new Producto();
-			prod.setName(name);
-			prod.setDescription(description);
-			prod.setPrice(price);
-			pService.save(prod);
-			return "/prod/prodForm.jsp";
+			Integer registrado = (Integer) session.getAttribute("registrado");
+			if (registrado == 1 ) {	
+				Producto prod = new Producto();
+				prod.setName(name);
+				prod.setDescription(description);
+				prod.setPrice(price);
+				pService.save(prod);
+				return "/prod/prodForm.jsp";
+			}
+			return "login.jsp";	
 		}
 		
 
 		@RequestMapping("/tabla_productos")
-		public String tablaProductos(Model modelo){
-			ArrayList<Producto> prodTable = new ArrayList<Producto>();
-			prodTable = (ArrayList<Producto>)pService.findAll();
-			modelo.addAttribute("prodTable",prodTable);
-			//modelo.addAttribute("listCarro",cService.findAll());
-			return "/prod/prodTable.jsp";
+		public String tablaProductos(HttpSession session,Model modelo){
+			Integer registrado = (Integer) session.getAttribute("registrado");
+			if (registrado == 1 ) {	
+				ArrayList<Producto> prodTable = new ArrayList<Producto>();
+				prodTable = (ArrayList<Producto>)pService.findAll();
+				modelo.addAttribute("prodTable",prodTable);
+				//modelo.addAttribute("listCarro",cService.findAll());
+				return "/prod/prodTable.jsp";
+			}
+			return "login.jsp";	
 		}
 		
 		@RequestMapping("/editar/{id}")
-		public String editar(@PathVariable("id") Long id, Model model){
-			model.addAttribute("producto", pService.finById(id));
-			return "/prod/editProdForm.jsp";
+		public String editar(HttpSession session,@PathVariable("id") Long id, Model model){
+			Integer registrado = (Integer) session.getAttribute("registrado");
+			if (registrado == 1 ) {	
+				model.addAttribute("producto", pService.finById(id));
+				return "/prod/editProdForm.jsp";
+			}
+			return "login.jsp";	
 			
 		}
+		
 		@RequestMapping("/update")
-		public String update(@ModelAttribute("producto") Producto prod){
-			pService.save(prod);
-			return "redirect:/producto/tabla_productos";
+		public String update(HttpSession session,@ModelAttribute("producto") Producto prod){
+			Integer registrado = (Integer) session.getAttribute("registrado");
+			if (registrado == 1 ) {	
+				pService.save(prod);
+				return "redirect:/producto/tabla_productos";
+			}
+			return "login.jsp";	
 		}
+		
 		@RequestMapping("/eliminar/{id}")
-		public String eliminar(@PathVariable("id") Long id, Model model){
-			pService.deleteById(id);
-			return "redirect:/prod/producto/tabla_productos";
-			
+		public String eliminar(HttpSession session,@PathVariable("id") Long id, Model model){
+			Integer registrado = (Integer) session.getAttribute("registrado");
+			if (registrado == 1 ) {	
+				pService.deleteById(id);
+				return "redirect:/prod/producto/tabla_productos";
+			}
+			return "login.jsp";	
 		}
 }
