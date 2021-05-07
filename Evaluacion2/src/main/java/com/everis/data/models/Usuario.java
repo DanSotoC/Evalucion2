@@ -1,18 +1,26 @@
 package com.everis.data.models;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="usuarios")
 public class Usuario {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -31,7 +39,12 @@ public class Usuario {
 	//Fin Relacion
 
 	
-	
+	@Column(updatable=false)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date createdAt;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date updatedAt;
 	
 	public Long getId() {
 		return id;
@@ -119,5 +132,19 @@ public class Usuario {
 		this.password = password;
 	}
 	
-	
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
+
+
+	@Override
+	public String toString() {
+		return name + "  " + lastname;
+	}
+    
 }

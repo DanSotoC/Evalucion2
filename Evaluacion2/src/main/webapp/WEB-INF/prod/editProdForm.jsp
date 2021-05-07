@@ -51,6 +51,7 @@
 				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
 				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
 				    <a class="navbar-brand" href="/carro">Carro</a>
+				    <a  href="/usuario/logout" class="btn btn-danger">LogOut</a>
 			</div>
 	</nav>
 	<br>

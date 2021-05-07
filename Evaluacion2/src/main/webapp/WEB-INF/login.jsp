@@ -42,9 +42,20 @@
 		}
 
 	</style>
+		<nav class="navbar navbar-dark bg-dark">
+  	<!-- Navbar content -->
+		   <div class="container-fluid">
+				    <a class="navbar-brand" href="/usuario/">Registrar Usuario</a>
+				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
+				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
+				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
+				    <a class="navbar-brand" href="/carro">Carro</a>
+				    <a  hidden href="/usuario/logout" class="btn btn-danger">LogOut</a>
+			</div>
+	</nav>
 	<c:if test="${registrado == 0}">
 	<div class="container" style="background-color=blue;">
-				<form class="well form-horizontal" action="/usuario/acceso" method="POST">
+				<form:form class="well form-horizontal" action="/usuario/acceso" modelAttribute="registrado" method="POST">
 				<fieldset>
 		
 				<!-- Form Name -->
@@ -75,23 +86,12 @@
 			  
 			  <br>
 			  <input class="btn btn-success" type="submit" value="Entrar">
-			  </form> <br><br>  
+			  </form:form> <br><br>  
 			</div>
 		</div>
 	</c:if>
 	<c:if test="${registrado == 1}">
 	  
-	<nav class="navbar navbar-dark bg-dark">
-  	<!-- La idea de esta seccion es: Una vez ya registrado y luego de borrar la url (sin hacer logout) le muestre el nav bar y un mensaje diciendo "Ya esta registrado" -->
-		   <div class="container-fluid">
-				    <a class="navbar-brand" href="/">Registrar Usuario</a>
-				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
-				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
-				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
-				    <a class="navbar-brand" href="/carro">Carro</a>
-			</div>
-	</nav>
-	<br>
 		<div class="container" style="background-color=blue;">
 				<fieldset>
 				<legend><center><h2><b>¡¡ Ya estas Logeado !!</b></h2></center></legend><br>

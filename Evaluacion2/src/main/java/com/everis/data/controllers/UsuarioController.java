@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,8 +28,9 @@ public class UsuarioController {
 		
 		@RequestMapping("")
 		private String home(HttpSession session) {
+			ArrayList<Usuario> userTable = (ArrayList<Usuario>)uService.findAll();
 			Integer registrado = (Integer) session.getAttribute("registrado");
-			if (registrado == 1 ) {
+			if (registrado == 1 ||  userTable.size()==0) {
 				return "/user/userForm.jsp";
 			}
 			
@@ -44,7 +44,9 @@ public class UsuarioController {
 				@RequestParam("mail") String mail,
 				@RequestParam("password") String password) {
 			Integer registrado = (Integer) session.getAttribute("registrado");
-			if (registrado == 1 ) {	
+			ArrayList<Usuario> userTable = (ArrayList<Usuario>)uService.findAll();
+			System.out.println(userTable.size());
+			if (registrado == 1 ||  userTable.size()==0) {	
 				Usuario user = new Usuario();
 				user.setName(name);
 				user.setLastname(lastname);
@@ -57,7 +59,7 @@ public class UsuarioController {
 					return "/user/error.jsp"; 
 				}
 				uService.save(user);
-				return "/user/userForm.jsp";
+				return "redirect:/usuario";
 			}
 			return "login.jsp";
 		}
@@ -121,6 +123,12 @@ public class UsuarioController {
 				session.setAttribute("registrado", 0);
 				return "login.jsp";
 		   }
+		}
+		
+		@RequestMapping("/logout")
+		public String cerrarSesion(HttpSession session){
+			session.setAttribute("registrado", 0);
+			return "redirect:/";
 		}
 
 }

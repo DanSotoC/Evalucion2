@@ -31,25 +31,26 @@
 	</style>
 	<nav class="navbar navbar-dark bg-dark">
   	<!-- Navbar content -->
-		  	 <div class="container-fluid">
-				    <a class="navbar-brand" href="/">Registrar Usuario</a>
+		   <div class="container-fluid">
+				    <a class="navbar-brand" href="/usuario/">Registrar Usuario</a>
 				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
 				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
 				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
 				    <a class="navbar-brand" href="/carro">Carro</a>
+				    <a  href="/usuario/logout" class="btn btn-danger">LogOut</a>
 			</div>
 	</nav>
 	
 	<center><h2><b>TABLA DE PRODUCTOS</b></h2></center>
 		<table class="table table-striped table-hover">
-	             <thead class="table-dark">
+	             <thead class="table-dark table-hover">
     				<tr>
 		              	  <th scope="col">Id</th>
 		                  <th scope="col">Nombre</th>
 		                  <th scope="col">Descripcion</th>
 		                  <th scope="col">Precio</th>
 		                  <th scope="col">Opciones</th>
-		                  <th scope="col">Carro</th>
+		                  
 		                  
 		             </tr>
 		         </thead>
@@ -64,15 +65,7 @@
 	   						<td><button type="button" class="btn btn-warning"><a href="/producto/editar/${prod.getId()}" style="text-decoration:none";>Edit</a></button>
 							<button type="button" class="btn btn-danger"><a href="/producto/eliminar/${prod.getId()}" style="text-decoration:none";>Delete</a></button></td>
 							
-							<td><form action="/carro/agregarUser" method="POST" modelAttribute="carro"> 
-							<select>
-								<option value="0">-Eliga Carro-</option>
-								<c:forEach var="carro" items="${listCarro}">
-									<option value="<c:out value="${carro.id}"></c:out>"><c:out value="${carro.name}"></c:out> </option><br>
-								</select>	
-								<button type="submit" class="btn btn-success">Añadir</button>	
-								</c:forEach>
-							</form></td>
+							
 	   					</tr>
 	   			   	</c:forEach>
 				 </tr>

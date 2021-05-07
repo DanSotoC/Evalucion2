@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,68 +23,67 @@
 </head>
 <body>
 		<style type="text/css">
-		
-	    body{
-	        margin: 0;
-	        padding:0;
-        
-	        background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0)), url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRloIzpO7aQ3BF_nDFxJZno9ONAxhwgnnbtSg&usqp=CAU');
-	        
-	       color: white; 
-	       height: 100vh;
-	                -webkit-background-size:cover;
-	                background-size: cover;
-	                background-position: center center;
-	                position: relative;
-	    }
-		div{
-		  background-color: grey;
-		}
+
 
 	</style>
 	<nav class="navbar navbar-dark bg-dark">
   	<!-- Navbar content -->
 		   <div class="container-fluid">
-				    <a class="navbar-brand" href="/">Registrar Usuario</a>
+				    <a class="navbar-brand" href="/usuario/">Registrar Usuario</a>
 				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
 				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
 				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
 				    <a class="navbar-brand" href="/carro">Carro</a>
+				    <a  href="/usuario/logout" class="btn btn-danger">LogOut</a>
 			</div>
 	</nav>
-	<br>
-	
-	<div class="container container-xs">
-				<form class="well form-horizontal" action="/carro/agregar" method="POST">
-				<fieldset>
-				<div class="form-group">
-				  <label class="col-md-4 control-label">Nombre del Carro</label>  
-				  <div class="col-md-4 inputGroupContainer">
-				  	<div class="input-group">
-				  		<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-				 		 <input  type="text" id="name" name="name" placeholder="Shopping cart Name" class="form-control">
-				  </div> 
-				  </div>
-				  <input class="btn btn-success" type="submit" value="Guardar">
-				</div>
-			    </form> 
-	</div>
-	
-	<center><h2><b>LISTADO DE COMPRAS</b></h2></center>
-		<table class="table table-striped table-hover">
+	    <form action="/carro/agregar" method="POST">
+			  <div class="form-row">
+			    <div class="form-grup col-md-2">
+			            <input  type="text" id="name" name="name" placeholder="Cart Name" class="form-control ">
+				        <input class="btn btn-success" type="submit" value="Crear">
+			    </div>
+			    <div class="form-grup col-md-8">
+			    		  <center><h2><b>LISTADO DE COMPRAS</b></h2></center>
+			    </div>
+			  </div>
+		</form>
+	    
+		<table class="table table-striped ">
 	             <thead class="table-dark">
     				<tr>
 		              	  <th scope="col">Id</th>
 		                  <th scope="col">Nombre</th>
-		                  <th scope="col">Usuario Name</th>
+		                  <th scope="col">Nombre</th>
 		                  <th scope="col">Productos</th>
-		                  <th scope="col">Opciones</th>
-		             </tr>
+		                  
+		           </tr>
 		         </thead>
 	             <tbody> 
 	              <tr>
-
-				 </tr>
+	              		<c:forEach var="carro" items="${listCarro}" >
+	              		<td> <c:out value = "${carro.getId()}"></c:out>  </td>
+	              		<td> <c:out value = "${carro.getName()}"></c:out>  </td>
+	              		<td> <c:out value = "${carro.usuario.toString()}"></c:out>  </td>
+						<td> <c:if test="${carro.usuario.getId()!=null}">  
+							  <form action="/carro/agregarProd" modelAttribute="producto" method="POST"> 
+								<input type="hidden" value="${carro.getId()}" name="carro_id">
+								  <div class="input-group">	
+									<select multiple class="custom-select form-group col-md-5 form-control-lg" name="carro_id">
+										<c:forEach var="producto" items="${listProd}">
+											<option value="<c:out value="${producto.id}"></c:out>"><c:out value="${prod.name} -- > $"> </c:out><c:out value="${prod.price}"></c:out> </option>
+										</c:forEach>
+									 </select>
+								  <div class="input-group-append">
+								 <button type="submit" class="btn btn-success"> Añadir</button>
+								 </div>
+								</div>
+								</form> <br>
+						</c:if></td>
+						</tr>	
+						</c:forEach> 
+						
+				 
 				</tbody>
 			</table>
 	

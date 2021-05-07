@@ -58,10 +58,8 @@ public class ProductoController {
 		public String tablaProductos(HttpSession session,Model modelo){
 			Integer registrado = (Integer) session.getAttribute("registrado");
 			if (registrado == 1 ) {	
-				ArrayList<Producto> prodTable = new ArrayList<Producto>();
-				prodTable = (ArrayList<Producto>)pService.findAll();
+				ArrayList<Producto> prodTable = (ArrayList<Producto>)pService.findAll();
 				modelo.addAttribute("prodTable",prodTable);
-				//modelo.addAttribute("listCarro",cService.findAll());
 				return "/prod/prodTable.jsp";
 			}
 			return "login.jsp";	

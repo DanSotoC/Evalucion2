@@ -1,7 +1,9 @@
 package com.everis.data.models;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -11,8 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="carros")
@@ -23,17 +29,30 @@ public class Carro {
 	private Long id;
 	@Size(min=4, max=20)
 	private String name;
+	
 	//Inicio Relacion
 	@OneToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	//Fin Relacion
+	
 	//Inicio Relacion
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="carros_productos",
-			   joinColumns = @JoinColumn(name="producto_id"),
-			   inverseJoinColumns = @JoinColumn(name ="carro_id"))
+			   joinColumns = @JoinColumn(name = "carro_id"),
+			   inverseJoinColumns = @JoinColumn(name = "producto_id"))
 	private List<Producto> productos;
+	
+	
+
+
+	@Column(updatable=false)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date createdAt;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date updatedAt;
+    
 	
 
 	public List<Producto> getProductos() {
@@ -69,5 +88,14 @@ public class Carro {
 		this.usuario = usuario;
 	}
 
-	
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
+    
+    
 }

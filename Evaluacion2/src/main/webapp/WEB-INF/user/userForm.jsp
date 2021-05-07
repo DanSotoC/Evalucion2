@@ -45,11 +45,12 @@
 	<nav class="navbar navbar-dark bg-dark">
   	<!-- Navbar content -->
 		   <div class="container-fluid">
-				    <a class="navbar-brand" href="/">Registrar Usuario</a>
+				    <a class="navbar-brand" href="/usuario/">Registrar Usuario</a>
 				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
 				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
 				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
 				    <a class="navbar-brand" href="/carro">Carro</a>
+				    <a  href="/usuario/logout" class="btn btn-danger">LogOut</a>
 			</div>
 	</nav>
 	<br>

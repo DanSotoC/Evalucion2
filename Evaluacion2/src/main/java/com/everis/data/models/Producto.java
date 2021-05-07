@@ -1,19 +1,25 @@
 package com.everis.data.models;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
-import javax.persistence.JoinColumn;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name="productos")
@@ -31,10 +37,16 @@ public class Producto {
 	
 	@ManyToMany(fetch=FetchType.LAZY)
 	@JoinTable(name="carros_productos",
-			   joinColumns = @JoinColumn(name="carro_id"),
-			   inverseJoinColumns = @JoinColumn(name="producto_id"))
+			   joinColumns = @JoinColumn(name = "producto_id"),
+			   inverseJoinColumns = @JoinColumn(name = "carro_id"))
 	private List<Carro> carros;
-
+	
+	@Column(updatable=false)
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date createdAt;
+    
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date updatedAt;
 	
 	public Producto() {	}
 
@@ -69,7 +81,7 @@ public class Producto {
 	}
 
 
-	public Integer getPrice() {
+    public Integer getPrice() {
 		return price;
 	}
 
@@ -78,7 +90,26 @@ public class Producto {
 		this.price = price;
 	}
 
-	
 
-	
+	@PrePersist
+    protected void onCreate(){
+        this.createdAt = new Date();
+    }
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
+
+
+	public List<Carro> getCarros() {
+		return carros;
+	}
+
+
+	public void setCarros(List<Carro> carros) {
+		this.carros = carros;
+	}
+
+    
+    
 }

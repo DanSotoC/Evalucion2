@@ -31,12 +31,13 @@
 	</style>
 	<nav class="navbar navbar-dark bg-dark">
   	<!-- Navbar content -->
-		  	 <div class="container-fluid">
-				    <a class="navbar-brand" href="/usuario">Registrar Usuario</a>
+		   <div class="container-fluid">
+				    <a class="navbar-brand" href="/usuario/">Registrar Usuario</a>
 				    <a class="navbar-brand" href="/usuario/tabla_usuarios">Tabla Usuarios</a>
 				    <a class="navbar-brand" href="/producto">Registrar Producto</a>
 				    <a class="navbar-brand" href="/producto/tabla_productos">Tabla Productos</a>
 				    <a class="navbar-brand" href="/carro">Carro</a>
+				    <a  href="/usuario/logout" class="btn btn-danger">LogOut</a>
 			</div>
 	</nav>
 	
@@ -67,7 +68,7 @@
 							<td><c:if test="${user.carro.getId()==null}"> 
 							
 								<form action="/carro/agregarUser" method="POST"> 
-								<input type="text" value="${user.getId()}" name="usuario_id"> 
+								<input type="hidden" value="${user.getId()}" name="usuario_id">
 								<select name="carro_id">
 									<option value="0">-Eliga Carro-</option>
 									<c:forEach var="carro" items="${listCarro}">
